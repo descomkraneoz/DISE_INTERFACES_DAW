@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario UT1 ACT1</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #00F;
+            border-bottom: dotted #0000FF;
+            width: 50%;
+            margin: auto;   
+    
+        }
+    
+        
+    
+        body {
+            background-color: #FFC;
+        }
+        </style>
+
+        <!--- Script en js para validar mediante un patter el codigo postal, tb puedo validar mas campos añadiendolos a este script ---->
+        <script>
+            function Valida(formulario){
+                alert('He entrado');
+                /* validación del CÓDIGO POSTAL */
+                var cp=/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/;
+                if (!(cp.test(formulario.cpostal.value))) { 
+                    alert('Contenido del cpostal no es un C&Oacute;DIGO POSTAL'); //&Oacute es la Ó en html
+                    return false; 
+                }
+                return true;
+            }
+        </script>       
+</head>
+<body>
+
+    <h1>Creación de un formulario con HTML5</h1></br>
+    <!--- Usamos el protocolo mailto para enviar un correo con los datos del formulario, en este caso de mi direccion a mi propia direccion ---->
+    <form name="form1" onsubmit="return Valida(this);" action="mailto:descom666999@gmail.com" method="post" enctype="text/plain">
+        <!--- Usamos el fieldset que permite organizar en grupos los campos de un formulario. ---->
+        <fieldset id="cliente">
+            <!--- Acompañamos al fieldset de un nombre con la etiqueta legend ---->
+            <legend>Cliente</legend>
+            <label for="nombreApellidos">Nombre y apellidos: </label>
+            <!--- Usamos el placeholder para crear la sugerencia sombreada, el size es para el tamaño de la caja, el maxlength para el maximo de los caracteres y el required para hacerlo un campo requerido ---->
+            <input type="text" id="nombreApellidos" name="nombreApellidos" placeholder="Nombre y apellidos"  maxlength="30" size="30" required></br></br>
+            <label for="direccion">Dirección: </label>
+            <input type="text" id="direccion" name="direccion" maxlength="50" size="40" required></br></br>
+            <label for="cp">Código Postal: </label>
+            <!--- Usamos el pattern para validar, pero en este caso lo haremos con js, el title es para anunciar al pasar el raton x encima o al surgir un fallo en el campo ---->
+            <input type="text" id="cp" name="cpostal" size="5" maxlength="5" pattern="(^([0-9]{5,5})|^)$" title="Un código postal es un número de cinco cifras sin letras" required/></br></br>
+            <label for="pais">País: </label>
+            <input type="text" id="pais" name="pais" value="Espa&ntilde;a"></br>            
+        </fieldset>
+        </br></br></br>
+        <fieldset id="pedido">
+            <legend>Pedido</legend>
+            <label for="modelo">Modelo: </label>
+            <!--- el campo value es para darle un valor a la caja y que se muestre al cargar el formulario, el readonly es para indicar que esta caja es solo de lectura y no se puede modificar ---->
+            <input type="text" id="modelo" name="modelo" value="modelo Severo" readonly="true"></br></br>
+            <label for="talla">Talla: </label></br>
+            <!--- el min y max es para indicar el tamaño de los valores del rango de la selección ---->
+            <input type="range" id="talla" name="talla" min="0" max="3"></br>
+            <label for="S">&nbsp;S &nbsp;</label><label for="M">&nbsp;&nbsp;&nbsp;&nbsp; M &nbsp;</label><label for="L">&nbsp;&nbsp;&nbsp;&nbsp; L &nbsp;</label><label for="XL">&nbsp;&nbsp;&nbsp; XL</label></br></br>
+            <label for="cantidad">Cantidad: </label>
+            <input type="number" id="cantidad" name="cantidad" max="6" min="0">                       
+        </fieldset>
+        </br></br>
+        <input type="submit" name="enviar" id="enviar" value="Realizar pedido"><label for="espacio">&nbsp;</label>
+        <input type="reset" name="anular" id="anular" value="Anular">
+
+
+    </form>
+    
+</body>
+</html>
